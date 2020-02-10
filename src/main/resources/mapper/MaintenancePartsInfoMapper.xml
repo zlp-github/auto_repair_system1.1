@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlp.auto_repair_system.mapper.MaintenancePartsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zlp.auto_repair_system.pojo.MaintenancePartsInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="maintenance_parts_info_num" jdbcType="VARCHAR" property="maintenancePartsInfoNum" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="part_id" jdbcType="VARCHAR" property="partId" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="part_number" jdbcType="INTEGER" property="partNumber" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="handler" jdbcType="VARCHAR" property="handler" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+  </resultMap>
+</mapper>
