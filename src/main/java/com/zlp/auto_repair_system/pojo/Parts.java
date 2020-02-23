@@ -1,26 +1,34 @@
 package com.zlp.auto_repair_system.pojo;
 
-import java.math.BigDecimal;
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
 @Table(name = "t_parts")
 public class Parts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "type")
     private String type;
 
     /**
      * 单价
      */
+    @Column(name = "price")
     private BigDecimal price;
 
     /**
      * 配件剩余量
      */
+    @Column(name = "surplus")
     private String surplus;
 
     /**

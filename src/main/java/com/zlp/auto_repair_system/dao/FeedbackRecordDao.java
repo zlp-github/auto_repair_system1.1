@@ -34,6 +34,13 @@ public class FeedbackRecordDao {
         return feedbackRecordMapper.selectByPrimaryKey(id);
     }
 
+    //通过姓名查询
+    public List<FeedbackRecord> findFeedbackRecoedByName(String name){
+        Example example = new Example(FeedbackRecord.class);
+        example.createCriteria().andEqualTo("clientName",name);
+        return feedbackRecordMapper.selectByExample(example);
+    }
+
     //获取所有反馈记录
     public List<FeedbackRecord> getAllFeedbackRecord(){
         return feedbackRecordMapper.selectAll();

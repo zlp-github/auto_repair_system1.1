@@ -1,6 +1,7 @@
 package com.zlp.auto_repair_system.service;
 
 import com.zlp.auto_repair_system.pojo.ReservationRecord;
+import com.zlp.auto_repair_system.response.GetAllReservationRecordResponse;
 
 import java.util.List;
 
@@ -15,7 +16,9 @@ public interface ReservationRecordService {
 
     ReservationRecord findReservationRecordById(Integer id);
 
-    List<ReservationRecord> getAllReservationRecord(Integer pageNumber , Integer pageSize);
+    List<ReservationRecord> findReservationRecordByName(String name);
+
+    GetAllReservationRecordResponse getAllReservationRecord(Integer pageNumber , Integer pageSize);
 
     Integer updateReservationRecord(ReservationRecord reservationRecord);
 

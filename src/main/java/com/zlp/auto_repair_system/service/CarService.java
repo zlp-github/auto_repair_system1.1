@@ -2,6 +2,7 @@ package com.zlp.auto_repair_system.service;
 
 
 import com.zlp.auto_repair_system.pojo.Car;
+import com.zlp.auto_repair_system.response.GetAllCarResponse;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface CarService {
     Integer addCar(Car car);
     Integer addCarList(List<Car> carList);
     Car findCarById(Integer id);
-    List<Car> getAllCars(Integer pageNumber,Integer pageSize);
+    GetAllCarResponse getAllCars(Integer pageNumber, Integer pageSize);
     Integer updateCar(Car car);
     Integer updateCarList(List<Car> cars);
     Integer deleteCarById(Integer id);

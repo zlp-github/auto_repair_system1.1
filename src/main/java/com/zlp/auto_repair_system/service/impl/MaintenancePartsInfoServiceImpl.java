@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.dao.MaintenancePartsInfoDao;
 import com.zlp.auto_repair_system.pojo.MaintenancePartsInfo;
+import com.zlp.auto_repair_system.response.GetAllMaintenancePartsInfoResponse;
 import com.zlp.auto_repair_system.service.MaintenancePartsInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +33,21 @@ public class MaintenancePartsInfoServiceImpl implements MaintenancePartsInfoServ
     }
 
     @Override
-    public List<MaintenancePartsInfo> getAllMaintenancePartsInfo(Integer pageNumber, Integer pageSize) {
-        PageHelper.offsetPage(pageNumber,pageSize);
+    public List<MaintenancePartsInfo> findMaintenancePartsInfoBycarNum(String carNum) {
+        return maintenancePartsInfoDao.findMaintenancePartsInfoBycarNum(carNum);
+    }
+
+    @Override
+    public GetAllMaintenancePartsInfoResponse getAllMaintenancePartsInfo(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<MaintenancePartsInfo> allMaintenancePartsInfo = maintenancePartsInfoDao.getAllMaintenancePartsInfo();
         PageInfo<MaintenancePartsInfo> maintenancePartsInfoPageInfo = new PageInfo<>(allMaintenancePartsInfo);
-        return maintenancePartsInfoPageInfo.getList();
+        GetAllMaintenancePartsInfoResponse getAllMaintenancePartsInfoResponse = new GetAllMaintenancePartsInfoResponse();
+        List<MaintenancePartsInfo> list = maintenancePartsInfoPageInfo.getList();
+        long total = maintenancePartsInfoPageInfo.getTotal();
+        getAllMaintenancePartsInfoResponse.setMaintenancePartsInfoList(list);
+        getAllMaintenancePartsInfoResponse.setTotal(total);
+        return getAllMaintenancePartsInfoResponse;
     }
 
     @Override

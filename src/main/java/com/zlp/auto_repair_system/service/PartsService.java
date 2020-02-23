@@ -2,6 +2,7 @@ package com.zlp.auto_repair_system.service;
 
 
 import com.zlp.auto_repair_system.pojo.Parts;
+import com.zlp.auto_repair_system.response.GetAllPartResponse;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface PartsService {
 
     List<Parts> findPartsByName(String name);
 
-    List<Parts> getAllParts(Integer pageNumber,Integer pageSize);
+    GetAllPartResponse getAllParts(Integer pageNumber, Integer pageSize);
 
     Integer updateParts(Parts parts);
 

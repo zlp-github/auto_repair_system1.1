@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.dao.ReservationRecordDao;
 import com.zlp.auto_repair_system.pojo.ReservationRecord;
+import com.zlp.auto_repair_system.response.GetAllReservationRecordResponse;
 import com.zlp.auto_repair_system.service.ReservationRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +33,21 @@ public class ReservationRecordServiceImpl implements ReservationRecordService {
     }
 
     @Override
-    public List<ReservationRecord> getAllReservationRecord(Integer pageNumber, Integer pageSize) {
-        PageHelper.offsetPage(pageNumber,pageSize);
+    public List<ReservationRecord> findReservationRecordByName(String name) {
+        return reservationRecordDao.findReservationRecordByName(name);
+    }
+
+    @Override
+    public GetAllReservationRecordResponse getAllReservationRecord(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<ReservationRecord> all = reservationRecordDao.getAllReservationRecord();
         PageInfo<ReservationRecord> reservationRecordPageInfo = new PageInfo<>(all);
-        return reservationRecordPageInfo.getList();
+        GetAllReservationRecordResponse getAllReservationRecordResponse = new GetAllReservationRecordResponse();
+        List<ReservationRecord> list = reservationRecordPageInfo.getList();
+        long total = reservationRecordPageInfo.getTotal();
+        getAllReservationRecordResponse.setReservationRecordList(list);
+        getAllReservationRecordResponse.setTotal(total);
+        return getAllReservationRecordResponse;
     }
 
     @Override

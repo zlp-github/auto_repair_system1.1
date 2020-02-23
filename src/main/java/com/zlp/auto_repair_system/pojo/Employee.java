@@ -1,25 +1,35 @@
 package com.zlp.auto_repair_system.pojo;
 
-import java.util.Date;
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 @Table(name = "t_employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer id;
 
     @Column(name = "nick_name")
     private String nickName;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "sex")
     private Integer sex;
 
+    @Column(name = "birthday")
     private Date birthday;
 
+    @Column(name = "phone")
     private String phone;
 
     /**

@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.dao.FeedbackRecordDao;
 import com.zlp.auto_repair_system.pojo.FeedbackRecord;
+import com.zlp.auto_repair_system.response.GetAllEmployeeResponse;
+import com.zlp.auto_repair_system.response.GetAllFeedbackRecordResponse;
 import com.zlp.auto_repair_system.service.FeedbackRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,15 +39,25 @@ public class FeedbackRecordServiceImpl implements FeedbackRecordService {
     }
 
     @Override
-    public List<FeedbackRecord> getAllFeedbackRecord(Integer pageNumber, Integer pageSize) {
-        PageHelper.offsetPage(pageNumber,pageSize);
+    public GetAllFeedbackRecordResponse getAllFeedbackRecord(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<FeedbackRecord> all = feedbackRecordDao.getAllFeedbackRecord();
         PageInfo<FeedbackRecord> feedbackRecordPageInfo = new PageInfo<>(all);
-        return feedbackRecordPageInfo.getList();
+        GetAllFeedbackRecordResponse getAllFeedbackRecordResponse = new GetAllFeedbackRecordResponse();
+        List<FeedbackRecord> feedbackRecordsList = feedbackRecordPageInfo.getList();
+        long total = feedbackRecordPageInfo.getTotal();
+        getAllFeedbackRecordResponse.setFeedbackRecordList(feedbackRecordsList);
+        getAllFeedbackRecordResponse.setTotal(total);
+        return getAllFeedbackRecordResponse;
     }
 
     @Override
     public Integer deleteFeedbackRecord(Integer id) {
         return feedbackRecordDao.deleteFeedbackRecord(id);
+    }
+
+    @Override
+    public List<FeedbackRecord> findFeedbackRecordByName(String name) {
+        return feedbackRecordDao.findFeedbackRecoedByName(name);
     }
 }

@@ -1,6 +1,7 @@
 package com.zlp.auto_repair_system.service;
 
 import com.zlp.auto_repair_system.pojo.MaintenanceRecord;
+import com.zlp.auto_repair_system.response.GetAllMaintenanceRecord;
 
 import java.util.List;
 
@@ -15,7 +16,9 @@ public interface MaintenanceRecordService {
 
     MaintenanceRecord findMaintenanceRecordInfoById(Integer id);
 
-    List<MaintenanceRecord> getAllMaintenanceRecord(Integer pageNumber, Integer pageSize);
+    List<MaintenanceRecord> findMaintenanceRecordInfoBycarNum(String carNum);
+
+    GetAllMaintenanceRecord getAllMaintenanceRecord(Integer pageNumber, Integer pageSize);
 
     Integer updateMaintenanceRecord(MaintenanceRecord maintenanceRecord);
 

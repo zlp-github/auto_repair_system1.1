@@ -4,6 +4,7 @@ import com.zlp.auto_repair_system.mapper.ReservationRecordMapper;
 import com.zlp.auto_repair_system.pojo.ReservationRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -32,6 +33,13 @@ public class ReservationRecordDao {
     //根据id获取预约记录
     public ReservationRecord findReservationRecordById(Integer id){
         return reservationRecordMapper.selectByPrimaryKey(id);
+    }
+
+    //根据客户姓名查询预约记录
+    public List<ReservationRecord> findReservationRecordByName(String name){
+        Example example = new Example(ReservationRecord.class);
+        example.createCriteria().andEqualTo("clientName",name);
+        return reservationRecordMapper.selectByExample(example);
     }
 
     //更新预约记录

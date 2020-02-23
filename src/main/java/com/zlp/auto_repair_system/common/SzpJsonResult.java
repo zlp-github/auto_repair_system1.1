@@ -1,4 +1,4 @@
-package com.springboot_test01.demo.common;
+package com.zlp.auto_repair_system.common;
 
 /**
  * @Auther: szp

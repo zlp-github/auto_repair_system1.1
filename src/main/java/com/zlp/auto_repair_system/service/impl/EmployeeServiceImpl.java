@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.common.SzpJsonResult;
 import com.zlp.auto_repair_system.dao.EmployeeDao;
 import com.zlp.auto_repair_system.pojo.Employee;
+import com.zlp.auto_repair_system.response.GetAllEmployeeResponse;
 import com.zlp.auto_repair_system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,11 +44,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getAllEmployee(Integer pageNumber, Integer pageSize) {
-        PageHelper.offsetPage(pageNumber,pageSize);
+    public GetAllEmployeeResponse getAllEmployee(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<Employee> all = employeeDao.getAllEmployeeInfo();
         PageInfo<Employee> allEmployee = new PageInfo<>(all);
-        return allEmployee.getList();
+        GetAllEmployeeResponse getAllEmployeeResponse = new GetAllEmployeeResponse();
+        List<Employee> employeeList = allEmployee.getList();
+        long total = allEmployee.getTotal();
+        getAllEmployeeResponse.setEmployeeList(employeeList);
+        getAllEmployeeResponse.setTotal(total);
+        return getAllEmployeeResponse;
     }
 
     @Override
@@ -71,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public SzpJsonResult<Employee> employeeLogin(String nick_name, String password) {
+    public List<Employee> employeeLogin(String nick_name, String password) {
         return employeeDao.employeeLogin(nick_name,password);
     }
 }

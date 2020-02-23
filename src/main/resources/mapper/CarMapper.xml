@@ -11,6 +11,6 @@
     <result column="color" jdbcType="VARCHAR" property="color" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="displacement" jdbcType="VARCHAR" property="displacement" />
-    <result column="client_id" jdbcType="INTEGER" property="clientId" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
   </resultMap>
 </mapper>

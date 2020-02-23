@@ -1,12 +1,16 @@
 package com.zlp.auto_repair_system.pojo;
 
-import java.util.Date;
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 @Table(name = "t_feedback_record")
 public class FeedbackRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer id;
 
     /**
@@ -19,7 +23,7 @@ public class FeedbackRecord {
      * 回复状态
      */
     @Column(name = "recoil_status")
-    private String recoilStatus;
+    private Integer recoilStatus;
 
     /**
      * 客户姓名
@@ -70,7 +74,7 @@ public class FeedbackRecord {
      *
      * @return recoil_status - 回复状态
      */
-    public String getRecoilStatus() {
+    public Integer getRecoilStatus() {
         return recoilStatus;
     }
 
@@ -79,8 +83,8 @@ public class FeedbackRecord {
      *
      * @param recoilStatus 回复状态
      */
-    public void setRecoilStatus(String recoilStatus) {
-        this.recoilStatus = recoilStatus == null ? null : recoilStatus.trim();
+    public void setRecoilStatus(Integer recoilStatus) {
+        this.recoilStatus = recoilStatus;
     }
 
     /**

@@ -1,11 +1,11 @@
-package com.springboot_test01.demo.common;
+package com.zlp.auto_repair_system.common;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springboot_test01.demo.pojo.User;
 
 import java.util.Date;
 import java.util.List;
+
 /**
  * Author: zlp
  * Date: 2020-01-08 20:58
@@ -71,12 +71,4 @@ public class JsonUtils {
         return null;
     }
 
-    public static void main(String[] args) {
-        User user=new User();
-        user.setNickName("asd");
-        user.setUpdateTime(new Date());
-        System.out.println(user);
-        String objectToJson = JsonUtils.objectToJson(user);
-        System.out.println(objectToJson);
-    }
 }

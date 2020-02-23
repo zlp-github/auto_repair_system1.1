@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * Author: zlp
  * Date: 2020-01-29 19:18
- * Description:张立朋，写点注释吧!!
+ * Description:客户dao
  */
 @Repository
 public class ClientDao {
@@ -72,9 +73,27 @@ public class ClientDao {
     }
 
     //客户登录验证
-    public SzpJsonResult<Client> clientLogin(String nickName,String password){
+    public List<Client> clientLogin(String nickName,String password){
         Example example = new Example(Client.class);
         example.createCriteria().andEqualTo("nickName",nickName).andEqualTo("password",password);
-        return SzpJsonResult.ok(clientMapper.selectByExample(example));
+        return clientMapper.selectByExample(example);
+    }
+
+    //注册验证
+    public SzpJsonResult<Integer> clientRegister(Client client){
+        Example example = new Example(Client.class);
+        example.createCriteria().andEqualTo("nickName",client.getNickName());
+        List<Client> clients = clientMapper.selectByExample(example);
+        System.out.println(clients.size());
+        if(clients.size() !=0 ){
+            return SzpJsonResult.ok(0);
+        }
+        else{
+            client.setCreateTime(new Date());
+            client.setUpdateTime(new Date());
+            client.setRoleId(1);
+            int num = clientMapper.insert(client);
+            return SzpJsonResult.ok(num);
+        }
     }
 }

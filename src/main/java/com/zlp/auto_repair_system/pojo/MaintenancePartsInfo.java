@@ -1,14 +1,18 @@
 package com.zlp.auto_repair_system.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
+@Entity
 @Table(name = "t_maintenance_parts_info")
 public class MaintenancePartsInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GenericGenerator(name = "increment", strategy = "increment")
+    protected Integer id;
 
     /**
      * 维修配件单号
@@ -40,6 +44,7 @@ public class MaintenancePartsInfo {
     /**
      * 经手人
      */
+    @Column(name = "handler")
     private String handler;
 
     @Column(name = "create_time")

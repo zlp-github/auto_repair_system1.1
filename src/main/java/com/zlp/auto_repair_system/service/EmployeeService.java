@@ -2,6 +2,7 @@ package com.zlp.auto_repair_system.service;
 
 import com.zlp.auto_repair_system.common.SzpJsonResult;
 import com.zlp.auto_repair_system.pojo.Employee;
+import com.zlp.auto_repair_system.response.GetAllEmployeeResponse;
 
 import java.util.List;
 
@@ -17,10 +18,10 @@ public interface EmployeeService {
     Integer addEmployeeList(List<Employee> employeeList);
     Employee findEmployeeById(Integer id);
     List<Employee> findEmployeeByName(String name);
-    List<Employee> getAllEmployee(Integer pageNumber,Integer pageSize);
+    GetAllEmployeeResponse getAllEmployee(Integer pageNumber, Integer pageSize);
     Integer updateEmployee(Employee employee);
     Integer updateEmployeeList(List<Employee> employee);
     Integer deleteEmployeeById(Integer id);
     Integer deleteEmployeeList(List<Integer> ids);
-    SzpJsonResult<Employee> employeeLogin(String nick_name, String password);
+    List<Employee> employeeLogin(String nick_name, String password);
 }

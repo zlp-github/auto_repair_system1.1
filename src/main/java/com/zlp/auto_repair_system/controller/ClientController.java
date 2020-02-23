@@ -1,53 +1,63 @@
 package com.zlp.auto_repair_system.controller;
 
-import com.zlp.auto_repair_system.pojo.Employee;
-import com.zlp.auto_repair_system.service.EmployeeService;
+import com.zlp.auto_repair_system.common.SzpJsonResult;
+import com.zlp.auto_repair_system.pojo.Client;
+import com.zlp.auto_repair_system.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Date;
+
 
 /**
  * Author: zlp
  * Date: 2020-02-05 0:08
- * Description:张立朋，写点注释吧!!
+ * Description:客户API
  */
 @RestController
-public class EmployeeController {
+public class ClientController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private ClientService clientService;
 
-    @PostMapping("add/employee")
-    public Integer addEmployee(Employee employee){
-        return employeeService.addEmployee(employee);
+    @PostMapping("add/client")
+    public SzpJsonResult<Integer> addClient(@RequestBody Client client){
+        client.setCreateTime(new Date());
+        client.setUpdateTime(new Date());
+        client.setRoleId(1);
+        return SzpJsonResult.ok(clientService.addClient(client));
     }
 
-    @GetMapping("find/employeeById")
-    public Employee findEmployeeById(Integer id){
-        return employeeService.findEmployeeById(id);
+    @GetMapping("find/clientById")
+    public SzpJsonResult<Client> findClientById(@RequestParam(value = "id") Integer id){
+        return SzpJsonResult.ok(clientService.findClientById(id));
     }
 
-    @GetMapping("find/employeeByName")
-    public List<Employee> findEmployeeByName(String name){
-        return employeeService.findEmployeeByName(name);
+    @GetMapping("find/clientByName")
+    public SzpJsonResult<Client> findClientByName(@RequestParam(value = "name") String name){
+        return SzpJsonResult.ok(clientService.findClientByName(name));
     }
 
-    @GetMapping("get/allEmployee")
-    public List<Employee> getAllEmployee(Integer pageSize,Integer pageNumber){
-        return employeeService.getAllEmployee(pageSize,pageNumber);
+    @GetMapping("get/allClient")
+    public SzpJsonResult<Client> getAllEmployee(@RequestParam(value = "pageNumber",defaultValue = "1") Integer pageNumber,
+                                                @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
+        return SzpJsonResult.ok(clientService.getAllClient(pageNumber,pageSize));
     }
 
-    @PostMapping("update/employee")
-    public Integer updateEmployee(Employee employee){
-        return employeeService.updateEmployee(employee);
+    @PostMapping("update/client")
+    public SzpJsonResult<Integer> updateClient(@RequestBody Client client){
+        client.setUpdateTime(new Date());
+        return SzpJsonResult.ok(clientService.updateClient(client));
     }
 
-    @PostMapping("delete/employeeById")
-    public Integer deleteEmployeeById(Integer id){
-        return employeeService.deleteEmployeeById(id);
+    @PostMapping("delete/clientById")
+    public SzpJsonResult<Integer> deleteClientById(@RequestParam(value = "id") Integer id){
+        return SzpJsonResult.ok(clientService.deleteClientById(id));
     }
 
+//    @GetMapping("login/client")
+//    public SzpJsonResult<Client> clientLogin(@RequestParam(value = "nickName") String nickName,
+//                                             @RequestParam(value = "password") String passWord){
+//        return SzpJsonResult.ok(clientService.clientLogin(nickName,passWord));
+//    }
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.dao.CarDao;
 import com.zlp.auto_repair_system.pojo.Car;
+import com.zlp.auto_repair_system.response.GetAllCarResponse;
 import com.zlp.auto_repair_system.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAllCars(Integer pageNumber, Integer pageSize) {
-        PageHelper.offsetPage(pageNumber,pageSize);
+    public GetAllCarResponse getAllCars(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<Car> all = carDao.getAllCars();
         PageInfo<Car> carPageInfo = new PageInfo<>(all);
-        return carPageInfo.getList();
+        GetAllCarResponse getAllCarResponse = new GetAllCarResponse();
+        getAllCarResponse.setTotal(carPageInfo.getTotal());
+        getAllCarResponse.setCarList(carPageInfo.getList());
+        return getAllCarResponse;
     }
 
     @Override

@@ -72,9 +72,9 @@ public class EmployeeDao {
     }
 
     //员工登录
-    public SzpJsonResult<Employee> employeeLogin(String nickName, String password){
+    public List<Employee> employeeLogin(String nickName, String password){
       Example example = new Example(Employee.class);
       example.createCriteria().andEqualTo("nickName",nickName).andEqualTo("password",password);
-      return SzpJsonResult.ok(employeeMapper.selectByExample(example));
+      return employeeMapper.selectByExample(example);
     }
 }

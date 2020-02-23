@@ -21,7 +21,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("get/allEmployee")
-    public SzpJsonResult<Employee> getAllEmployee(@RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber,
+    public SzpJsonResult<Employee> getAllEmployee(@RequestParam(value = "pageNumber",defaultValue = "1") Integer pageNumber,
                                                   @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
         return SzpJsonResult.ok(employeeService.getAllEmployee(pageNumber,pageSize));
     }
@@ -36,7 +36,7 @@ public class EmployeeController {
         return SzpJsonResult.ok(employeeService.findEmployeeByName(name));
     }
 
-    @PostMapping("register/employee")
+    @PostMapping("add/employee")
     public SzpJsonResult<Integer> addEmployee(@RequestBody Employee employee){
         employee.setBirthday(new Date());
         employee.setRoleId(1);

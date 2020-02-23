@@ -4,6 +4,7 @@ import com.zlp.auto_repair_system.mapper.MaintenancePartsInfoMapper;
 import com.zlp.auto_repair_system.pojo.MaintenancePartsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -26,6 +27,13 @@ public class MaintenancePartsInfoDao {
     //通过id查找配件信息表
     public MaintenancePartsInfo findMaintenancePartsInfoById(Integer id){
         return maintenancePartsInfoMapper.selectByPrimaryKey(id);
+    }
+
+    //通过车牌号查询配件信息表
+    public List<MaintenancePartsInfo> findMaintenancePartsInfoBycarNum(String carNum){
+        Example example = new Example(MaintenancePartsInfo.class);
+        example.createCriteria().andEqualTo("carNumber",carNum);
+        return maintenancePartsInfoMapper.selectByExample(example);
     }
 
     //获取全部配件信息记录

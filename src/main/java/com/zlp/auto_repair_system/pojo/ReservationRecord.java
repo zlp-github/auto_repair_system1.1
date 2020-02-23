@@ -1,12 +1,16 @@
 package com.zlp.auto_repair_system.pojo;
 
-import java.util.Date;
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 @Table(name = "t_reservation_record")
 public class ReservationRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer id;
 
     /**
@@ -24,6 +28,7 @@ public class ReservationRecord {
     /**
      * 预约状态
      */
+    @Column(name = "status")
     private Integer status;
 
     /**

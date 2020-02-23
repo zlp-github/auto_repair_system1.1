@@ -1,12 +1,16 @@
 package com.zlp.auto_repair_system.pojo;
 
-import java.util.Date;
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 @Table(name = "t_maintenance_record")
 public class MaintenanceRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer id;
 
     /**
@@ -54,11 +58,13 @@ public class MaintenanceRecord {
     /**
      * 经手人
      */
+    @Column(name = "handler")
     private String handler;
 
     /**
      * 备注
      */
+    @Column(name = "remark")
     private String remark;
 
     @Column(name = "create_time")

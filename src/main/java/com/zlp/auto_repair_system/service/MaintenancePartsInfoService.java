@@ -1,6 +1,8 @@
 package com.zlp.auto_repair_system.service;
 
 import com.zlp.auto_repair_system.pojo.MaintenancePartsInfo;
+import com.zlp.auto_repair_system.response.GetAllMaintenancePartsInfoResponse;
+import sun.applet.Main;
 
 import java.util.List;
 
@@ -15,7 +17,9 @@ public interface MaintenancePartsInfoService {
 
     MaintenancePartsInfo findMaintenancePartsInfoById(Integer id);
 
-    List<MaintenancePartsInfo> getAllMaintenancePartsInfo(Integer pageNumber,Integer pageSize);
+    List<MaintenancePartsInfo> findMaintenancePartsInfoBycarNum(String carNum);
+
+    GetAllMaintenancePartsInfoResponse getAllMaintenancePartsInfo(Integer pageNumber, Integer pageSize);
 
     Integer updateMaintenancePartsInfo(MaintenancePartsInfo maintenancePartsInfo);
 

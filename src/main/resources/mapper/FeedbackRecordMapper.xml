@@ -7,7 +7,7 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="feedback_content" jdbcType="VARCHAR" property="feedbackContent" />
-    <result column="recoil_status" jdbcType="VARCHAR" property="recoilStatus" />
+    <result column="recoil_status" jdbcType="INTEGER" property="recoilStatus" />
     <result column="client_name" jdbcType="VARCHAR" property="clientName" />
     <result column="message_time" jdbcType="TIMESTAMP" property="messageTime" />
   </resultMap>

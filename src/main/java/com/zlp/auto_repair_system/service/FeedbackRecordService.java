@@ -1,6 +1,7 @@
 package com.zlp.auto_repair_system.service;
 
 import com.zlp.auto_repair_system.pojo.FeedbackRecord;
+import com.zlp.auto_repair_system.response.GetAllFeedbackRecordResponse;
 
 import java.util.List;
 
@@ -17,7 +18,9 @@ public interface FeedbackRecordService {
 
     FeedbackRecord findFeedbackRecordById(Integer id);
 
-    List<FeedbackRecord> getAllFeedbackRecord(Integer pageNumber,Integer pageSize);
+    List<FeedbackRecord> findFeedbackRecordByName(String name);
+
+    GetAllFeedbackRecordResponse getAllFeedbackRecord(Integer pageNumber, Integer pageSize);
 
     Integer deleteFeedbackRecord(Integer id);
 }

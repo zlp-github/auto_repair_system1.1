@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.dao.PartsDao;
 import com.zlp.auto_repair_system.pojo.Parts;
+import com.zlp.auto_repair_system.response.GetAllMaintenanceRecord;
+import com.zlp.auto_repair_system.response.GetAllPartResponse;
 import com.zlp.auto_repair_system.service.PartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,11 +45,16 @@ public class PartsServiceImpl implements PartsService {
     }
 
     @Override
-    public List<Parts> getAllParts(Integer pageNumber, Integer pageSize) {
-        PageHelper.offsetPage(pageNumber,pageSize);
+    public GetAllPartResponse getAllParts(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<Parts> all = partsDao.getAllParts();
         PageInfo<Parts> partsPageInfo = new PageInfo<>(all);
-        return partsPageInfo.getList();
+        GetAllPartResponse getAllPartResponse = new GetAllPartResponse();
+        List<Parts> list = partsPageInfo.getList();
+        long total = partsPageInfo.getTotal();
+        getAllPartResponse.setPartsList(list);
+        getAllPartResponse.setTotal(total);
+        return getAllPartResponse;
     }
 
     @Override

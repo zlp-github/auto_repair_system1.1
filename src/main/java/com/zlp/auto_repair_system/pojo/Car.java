@@ -1,33 +1,39 @@
 package com.zlp.auto_repair_system.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
+@Entity
 @Table(name = "t_car")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "car_number")
     private String carNumber;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "color")
     private String color;
 
+    @Column(name = "type")
     private String type;
 
     /**
      * 排量
      */
+    @Column(name = "displacement")
     private String displacement;
 
     /**
      * 客户编号
      */
-    @Column(name = "client_id")
-    private Integer clientId;
-
+    @Column(name = "client_name")
+    private String clientName;
     /**
      * @return id
      */
@@ -119,18 +125,18 @@ public class Car {
     /**
      * 获取客户编号
      *
-     * @return client_id - 客户编号
+     * @return client_name- 客户编号
      */
-    public Integer getClientId() {
-        return clientId;
+    public String getClientName() {
+        return clientName;
     }
 
     /**
      * 设置客户编号
      *
-     * @param clientId 客户编号
+     * @param clientName 客户编号
      */
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }

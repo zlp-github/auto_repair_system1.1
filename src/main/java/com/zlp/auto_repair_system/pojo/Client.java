@@ -1,12 +1,16 @@
 package com.zlp.auto_repair_system.pojo;
 
-import java.util.Date;
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 @Table(name = "t_client")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer id;
 
     /**
@@ -15,14 +19,19 @@ public class Client {
     @Column(name = "nick_name")
     private String nickName;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "sex")
     private Integer sex;
 
+    @Column(name = "address")
     private String address;
 
     @Column(name = "car_number")
@@ -31,8 +40,8 @@ public class Client {
     /**
      * 角色编号
      */
-    @Column(name = "roler_id")
-    private Integer rolerId;
+    @Column(name = "role_id")
+    private Integer roleId;
 
     /**
      * 注册时间
@@ -167,17 +176,17 @@ public class Client {
      *
      * @return roler_id - 角色编号
      */
-    public Integer getRolerId() {
-        return rolerId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
      * 设置角色编号
      *
-     * @param rolerId 角色编号
+     * @param roleId 角色编号
      */
-    public void setRolerId(Integer rolerId) {
-        this.rolerId = rolerId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     /**

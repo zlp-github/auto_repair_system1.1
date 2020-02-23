@@ -13,7 +13,7 @@
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
-    <result column="roler_id" jdbcType="INTEGER" property="rolerId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>

@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.zlp.auto_repair_system.common.SzpJsonResult;
 import com.zlp.auto_repair_system.dao.ClientDao;
 import com.zlp.auto_repair_system.pojo.Client;
+import com.zlp.auto_repair_system.response.GetAllClientResponse;
 import com.zlp.auto_repair_system.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -43,11 +45,16 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> getAllClient(Integer pageNumber , Integer pageSize) {
+    public GetAllClientResponse getAllClient(Integer pageNumber , Integer pageSize) {
         PageHelper.startPage(pageNumber,pageSize);
         List<Client> all = clientDao.getAllClient();
         PageInfo<Client> clientPageInfo = new PageInfo<>(all);
-        return clientPageInfo.getList();
+        GetAllClientResponse getAllClientResponse = new GetAllClientResponse();
+        List<Client> clientList = clientPageInfo.getList();
+        long total = clientPageInfo.getTotal();
+        getAllClientResponse.setClientList(clientList);
+        getAllClientResponse.setTotal(total);
+        return getAllClientResponse;
     }
 
     @Override
@@ -71,7 +78,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public SzpJsonResult<Client> clientLogin(String nickName, String password) {
+    public List<Client> clientLogin(String nickName, String password) {
         return clientDao.clientLogin(nickName,password);
+    }
+
+    @Override
+    public SzpJsonResult<Client> clientRegister(Client client) {
+        return SzpJsonResult.ok(clientDao.clientRegister(client));
     }
 }
